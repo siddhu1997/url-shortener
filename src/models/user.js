@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
         minLength: 6,
         trim: true,
         validate(value) {
+            //TODO : Improve validation
             if(value.toLowerCase().includes("password")) {
                 throw new Error("Common word password included in password!")
             }
@@ -64,7 +65,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.genAuthToken = async function() {
     const user = this
-    const token = jwt.sign({_id: user.id.toString() },'QwErTy!')
+    const token = jwt.sign({_id: user.id.toString() }, process.env.JWT_SECRET)
     user.tokens = user.tokens.concat({ token })
     await user.save()
     return token
