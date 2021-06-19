@@ -7,7 +7,6 @@ const uri = "mongodb+srv://"+dbUser+":"+dbPassword+"@"+dbURL+"?retryWrites=true&
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
 })
 
 module.exports = mongoose
